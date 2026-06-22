@@ -1,12 +1,5 @@
 import type { MoviesResponse  } from '../types'
 
-// مساعد لتحويل الدقائق → "2h 22m"
-// const formatRuntime = (mins: number) => {
-//   const h = Math.floor(mins / 60)
-//   const m = mins % 60
-//   return `${h}h ${m}m`
-// }
-
 interface Props {
   movie: MoviesResponse | null
 }

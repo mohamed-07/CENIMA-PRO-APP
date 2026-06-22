@@ -17,6 +17,7 @@ const navLinks = [
   { name: "Movies", href: "/movies" },
   { name: "TV Shows", href: "/tv-shows" },
   { name: "My List", href: "/my-list" },
+  { name: "Profile", href: "/profile" },
 ];
 
 export default function NavBar() {
@@ -96,7 +97,7 @@ export default function NavBar() {
                       onClick={()=>setIsMobileMenuOpen(false)}
                       className={cn(
                         "px-4 py-3 rounded-lg text-lg font-medium transition-all",
-                        "text-black bg-transparent hover:text-primary hover:bg-white/10",
+                        " bg-transparent hover:text-primary hover:bg-white/10",
                         isActive(link.href) &&
                           "text-white bg-gray-400/10 border-r-2 border-primary"
                       )}

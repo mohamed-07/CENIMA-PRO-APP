@@ -5,7 +5,7 @@ import type { Episode } from "@/types";
 
 const IMG_BASE = "https://image.tmdb.org/t/p";
 
-function EpisodeCard({ episode, index }: { episode: Episode; index: number }) {
+function EpisodeCard({ episode, }: { episode: Episode; index: number }) {
   const hasImage = !!episode.still_path;
 
   return (
