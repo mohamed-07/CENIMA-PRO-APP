@@ -6,11 +6,11 @@ export default function MainLayout() {
     <div>
       <NavBar />
       
-      <main className="mt-18">
-          <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
+      <main className="mt-17">
+          <div className="">
               <Outlet />
           </div>
-        </main>
+      </main>
     </div>
   )
 }

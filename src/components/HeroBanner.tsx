@@ -1,14 +1,14 @@
-import type { Movie } from '../types'
+import type { MoviesResponse  } from '../types'
 
 // مساعد لتحويل الدقائق → "2h 22m"
-const formatRuntime = (mins: number) => {
-  const h = Math.floor(mins / 60)
-  const m = mins % 60
-  return `${h}h ${m}m`
-}
+// const formatRuntime = (mins: number) => {
+//   const h = Math.floor(mins / 60)
+//   const m = mins % 60
+//   return `${h}h ${m}m`
+// }
 
 interface Props {
-  movie: Movie
+  movie: MoviesResponse | null
 }
 
 export const HeroBanner = ({ movie }: Props) => {
@@ -17,9 +17,10 @@ export const HeroBanner = ({ movie }: Props) => {
 
       {/* الصورة الخلفية */}
       <img
-        src={movie.primaryImage}
-        alt={movie.primaryTitle}
-        className="absolute inset-0 w-full h-full object-cover"
+        src={'https://image.tmdb.org/t/p/w500' + movie?.results[0].poster_path}
+        alt={movie?.results[0].title}
+        className="absolute inset-0 w-full h-full  object-cover"
+        loading='lazy'
       />
 
       {/* Gradient Overlay */}
@@ -31,29 +32,30 @@ export const HeroBanner = ({ movie }: Props) => {
 
         {/* Genre Badge */}
         <span className="text-xs font-bold tracking-widest text-white uppercase">
-          {movie.genres?.[0] || 'Action'}
+          {/* {movie.genres?.[0] || 'Action'} */}
+          {movie?.results[0]?.genres?.[0] || 'Action'}
         </span>
 
         {/* العنوان */}
         <h1 className="text-5xl font-black text-white uppercase leading-tight">
-          {movie.primaryTitle}
+          {movie?.results[0]?.title}
         </h1>
 
         {/* المعلومات */}
         <div className="flex items-center gap-3 text-sm text-white/80">
           <span className="text-green-400 font-bold">
-            ⭐ {movie.averageRating}
+            ⭐ {movie?.results[0]?.vote_average.toFixed(1)}
           </span>
-          <span>{movie.startYear}</span>
+          <span>{movie?.results[0]?.release_date}</span>
           <span className="border border-white/40 px-1 text-xs">
-            {movie.contentRating}
+            {movie?.results[0]?.popularity.toFixed(0)} views 
           </span>
-          <span>{formatRuntime(movie.runtimeMinutes)}</span>
+          <span>{ movie?.results[0]?.spokenLanguages?.[0] || 'English' }</span>
         </div>
 
         {/* الوصف */}
         <p className="text-white/70 text-sm leading-relaxed line-clamp-3">
-          {movie.description}
+          {movie?.results[0].description}
         </p>
 
         {/* الأزرار */}
