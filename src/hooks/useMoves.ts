@@ -6,7 +6,7 @@ export const useMovies = () => {
     const [moviesData, setMoviesData] = useState<MoviesResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(9);
 
     useEffect(() => { 
         getMostPopularMovies(page)

@@ -5,12 +5,12 @@ export default function MainLayout() {
   return (
     <div>
       <NavBar />
-      
-      <main className="mt-17">
+
+      <main className="md:mt-17 ">
           <div className="">
               <Outlet />
           </div>
-      </main>
+      </main> 
     </div>
   )
 }

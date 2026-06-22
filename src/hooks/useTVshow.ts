@@ -7,7 +7,7 @@ export const useTvShow = () => {
     const [tvShowData, setTvShowData] = useState<TVShowResponse | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null);
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(3)
 
     useEffect(() => {
         getPopularTVShows(page)
