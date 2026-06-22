@@ -5,13 +5,13 @@ import type { Episode } from "@/types";
 
 const IMG_BASE = "https://image.tmdb.org/t/p";
 
-function EpisodeCard({ episode, }: { episode: Episode; index: number }) {
+function EpisodeCard({ episode }: { episode: Episode; index: number }) {
   const hasImage = !!episode.still_path;
 
   return (
     <div
       className="group flex flex-col sm:flex-row gap-4 bg-white/5 border border-white/10 rounded-xl overflow-hidden
-                 hover:border-primary/60 hover:bg-white/[0.08]
+                 hover:border-primary/60 hover:bg-white/8
                  hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(229,9,20,0.25)]
                  transition-all duration-300 ease-out cursor-pointer"
     >
@@ -30,7 +30,9 @@ function EpisodeCard({ episode, }: { episode: Episode; index: number }) {
             <span
               className="text-4xl opacity-20 transition-all duration-300
                          group-hover:opacity-60 group-hover:scale-125"
-            >🎬</span>
+            >
+              🎬
+            </span>
           </div>
         )}
 
@@ -47,7 +49,11 @@ function EpisodeCard({ episode, }: { episode: Episode; index: number }) {
                        transition-transform duration-300 ease-out
                        shadow-[0_0_20px_rgba(229,9,20,0.6)]"
           >
-            <svg className="w-5 h-5 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+            <svg
+              className="w-5 h-5 text-white ml-0.5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
               <path d="M8 5v14l11-7z" />
             </svg>
           </div>
@@ -90,7 +96,9 @@ function EpisodeCard({ episode, }: { episode: Episode; index: number }) {
             <span className="text-gray-500 text-xs">· {episode.air_date}</span>
           )}
           {episode.runtime && (
-            <span className="text-gray-500 text-xs">· {episode.runtime} min</span>
+            <span className="text-gray-500 text-xs">
+              · {episode.runtime} min
+            </span>
           )}
           {episode.episode_type && episode.episode_type !== "standard" && (
             <span className="px-2 py-0.5 bg-primary/20 text-primary text-xs rounded-full border border-primary/30 capitalize">
@@ -143,9 +151,15 @@ function EpisodeCard({ episode, }: { episode: Episode; index: number }) {
 }
 
 export default function SeasonDetailsPage() {
-  const { id, seasonNumber } = useParams<{ id: string; seasonNumber: string }>();
+  const { id, seasonNumber } = useParams<{
+    id: string;
+    seasonNumber: string;
+  }>();
   const navigate = useNavigate();
-  const { season, loading, error } = useSeasonDetails(Number(id), Number(seasonNumber));
+  const { season, loading, error } = useSeasonDetails(
+    Number(id),
+    Number(seasonNumber),
+  );
 
   // Loading skeletons
   if (loading) {
@@ -193,7 +207,6 @@ export default function SeasonDetailsPage() {
 
   return (
     <div className="relative min-h-screen bg-background">
-
       {/* Hero Backdrop (using first episode still or poster) */}
       <div className="absolute inset-x-0 top-0 h-80 pointer-events-none overflow-hidden">
         {season.poster_path ? (
@@ -209,24 +222,24 @@ export default function SeasonDetailsPage() {
             className="w-full h-full object-cover object-top opacity-25 blur-sm scale-105"
           />
         ) : null}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/70 to-background" />
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20">
-
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-gray-400 hover:text-white transition text-sm mb-8 group"
         >
-          <span className="group-hover:-translate-x-1 transition-transform">←</span>
+          <span className="group-hover:-translate-x-1 transition-transform">
+            ←
+          </span>
           Back to Show
         </button>
 
         {/* Season Header */}
         <div className="flex flex-col md:flex-row gap-8 mb-12">
-
           {/* Poster */}
           {season.poster_path && (
             <div className="shrink-0 self-start">
@@ -272,25 +285,36 @@ export default function SeasonDetailsPage() {
             {/* Stats row */}
             <div className="flex flex-wrap gap-4 mt-2">
               <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center min-w-20 backdrop-blur">
-                <p className="text-gray-400 text-xs uppercase tracking-wider">Episodes</p>
-                <p className="text-white font-bold text-xl mt-1">{episodeCount}</p>
+                <p className="text-gray-400 text-xs uppercase tracking-wider">
+                  Episodes
+                </p>
+                <p className="text-white font-bold text-xl mt-1">
+                  {episodeCount}
+                </p>
               </div>
               {season.season_number !== undefined && (
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center min-w-20 backdrop-blur">
-                  <p className="text-gray-400 text-xs uppercase tracking-wider">Season</p>
-                  <p className="text-white font-bold text-xl mt-1">{season.season_number}</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-wider">
+                    Season
+                  </p>
+                  <p className="text-white font-bold text-xl mt-1">
+                    {season.season_number}
+                  </p>
                 </div>
               )}
               {season.episodes && season.episodes.length > 0 && (
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center min-w-24 backdrop-blur">
-                  <p className="text-gray-400 text-xs uppercase tracking-wider">Avg Rating</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-wider">
+                    Avg Rating
+                  </p>
                   <p className="text-white font-bold text-xl mt-1">
                     ⭐{" "}
                     {(
                       season.episodes
                         .filter((ep) => ep.vote_average > 0)
                         .reduce((acc, ep) => acc + ep.vote_average, 0) /
-                        (season.episodes.filter((ep) => ep.vote_average > 0).length || 1)
+                      (season.episodes.filter((ep) => ep.vote_average > 0)
+                        .length || 1)
                     ).toFixed(1)}
                   </p>
                 </div>
@@ -301,7 +325,9 @@ export default function SeasonDetailsPage() {
 
         {/* Divider */}
         <div className="flex items-center gap-4 mb-8">
-          <h2 className="text-xl font-bold text-white whitespace-nowrap">All Episodes</h2>
+          <h2 className="text-xl font-bold text-white whitespace-nowrap">
+            All Episodes
+          </h2>
           <div className="flex-1 h-px bg-white/10" />
           <span className="text-gray-500 text-sm">{episodeCount} total</span>
         </div>

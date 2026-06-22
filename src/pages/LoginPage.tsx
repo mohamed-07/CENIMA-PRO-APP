@@ -497,16 +497,14 @@ function StatBadge({ icon: Icon, value, label }: { icon: React.ElementType; valu
 
 // ─── Main Auth Page ───────────────────────────────────────────────────────────
 export default function LoginPage() {
-  const [tab, setTab] = useState<Tab>('login');
-
-  // RegisterPage sets a sessionStorage flag to open on the register tab
-  useEffect(() => {
+  const [tab, setTab] = useState<Tab>(() => {
     const flag = sessionStorage.getItem('auth-tab');
     if (flag === 'register') {
-      setTab('register');
       sessionStorage.removeItem('auth-tab');
+      return 'register';
     }
-  }, []);
+    return 'login';
+  });
 
   return (
     <div className="min-h-screen w-full flex bg-[#0F172A] overflow-hidden">

@@ -8,7 +8,7 @@ const api = axios.create({
         'X-RapidAPI-Host': import.meta.env.VITE_RAPIDAPI_HOST
     }
 })
-// TMDB API 
+// TMDB API  $$$$
 const tmdbApi = axios.create({
     baseURL: import.meta.env.VITE_TMDB_API_URL,
     params: {

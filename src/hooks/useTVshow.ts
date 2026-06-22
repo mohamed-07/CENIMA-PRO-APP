@@ -5,7 +5,7 @@ import type { TVShowResponse } from "@/types";
 
 export const useTvShow = () => {
     const [tvShowData, setTvShowData] = useState<TVShowResponse | null>(null)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true) 
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(3)
 
@@ -19,4 +19,4 @@ export const useTvShow = () => {
     const nextPage = () => setPage(prev => prev + 1)
     const prevPage = () => setPage(prev => Math.max(1, prev - 1))
     return { tvShowData, loading, error, nextPage, prevPage };
-}
+} 
