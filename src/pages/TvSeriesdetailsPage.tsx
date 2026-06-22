@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useTvDetails } from "@/hooks/useTvDetails"
 import { Skeleton } from "@/components/ui/skeleton"
+
 
 export default function TvSeriesdetailsPage() {
 
 const IMG_BASE = "https://image.tmdb.org/t/p"
 const { id } = useParams<{ id: string }>()
+
 const { show, loading, error } = useTvDetails(Number(id))
-console.log("From TvSeriesdetailsPage:", id);
-console.log("From TvSeriesdetailsPage:", show);
+
   
   return (
     <div>
@@ -17,13 +18,13 @@ console.log("From TvSeriesdetailsPage:", show);
       {show && (
         <div className="relative min-h-screen bg-background">
             {/* Backdrop */}
-          <div className="absolute inset-0 h-[500px]">
+          <div className="absolute inset-x-0 top-0 h-125 pointer-events-none">
                 <img
                     src={`${IMG_BASE}/original${show.backdrop_path}`}
                     alt={show.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-background" />
+                <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/80 to-background pointer-events-none" />
             </div>
 
             {/* Main Content */}
@@ -153,17 +154,19 @@ console.log("From TvSeriesdetailsPage:", show);
                     <h2 className="text-xl font-bold text-white mb-4">Seasons</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {show.seasons.map((season) => (
-                            <div key={season.id} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:cursor-pointer hover:border-primary/50 transition">
-                                <img
-                                    src={season.poster_path ? `${IMG_BASE}/w185${season.poster_path}` : "/placeholder.jpg"}
-                                    alt={season.name}
-                                    className="w-full aspect-[2/3] object-cover"
-                                />
-                                <div className="p-2">
-                                    <p className="text-white text-sm font-medium truncate">{season.name}</p>
-                                    <p className="text-gray-400 text-xs">{season.episode_count} episodes</p>
+                            <Link to={`/tv/${show.id}/season/${season.season_number}`} key={season.id}>
+                                <div key={season.id} className="season-card">
+                                    <img
+                                        src={season.poster_path ? `${IMG_BASE}/w185${season.poster_path}` : "/placeholder.jpg"}
+                                        alt={season.name}
+                                        className="w-full aspect-2/3 object-cover"
+                                    />
+                                    <div className="p-2">
+                                        <p className="text-white text-sm font-medium truncate">{season.name}</p>
+                                        <p className="text-gray-400 text-xs">{season.episode_count} episodes</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

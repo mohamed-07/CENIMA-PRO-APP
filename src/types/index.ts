@@ -102,3 +102,54 @@ export type TvShowDetails = {
         still_path: string
     } | null
 }
+// types/index.ts for season details
+export interface Person {
+  adult: boolean
+  gender: number
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string | null
+}
+export interface CrewMember extends Person {
+  department: string
+  job: string
+  credit_id: string
+}
+export interface GuestStar extends Person {
+  character: string
+  credit_id: string
+  order: number
+}
+export interface Episode {
+  air_date: string
+  episode_number: number
+  episode_type: string
+  id: number
+  name: string
+  overview: string
+  production_code: string
+  runtime: number
+  season_number: number
+  show_id: number
+  still_path: string | null
+  vote_average: number
+  vote_count: number
+
+  crew: CrewMember[]
+  guest_stars: GuestStar[]
+}
+
+export interface SeasonDetails {
+  _id: string
+  air_date: string
+  episodes: Episode[]
+
+  name?: string
+  overview?: string
+  id?: number
+  poster_path?: string | null
+  season_number?: number
+}

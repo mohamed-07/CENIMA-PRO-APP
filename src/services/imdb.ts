@@ -49,3 +49,8 @@ export const getTvShowDetails = async (id: number,signal?: AbortSignal ): Promis
     const response = await tmdbApi.get(`/tv/${id}`, { signal })
     return response.data
 }
+
+export const getSeasonDetails = async (id: number, seasonNumber: number, signal?: AbortSignal) => {
+    const response = await tmdbApi.get(`/tv/${id}/season/${seasonNumber}`, { signal })
+    return response.data
+}

@@ -43,4 +43,22 @@
   }
 }
 
+.season-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateY(0);
+  box-shadow: none;
+  transition: all 0.3s ease-out;
+}
+
+.season-card:hover {
+  border-color: #E50914;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(229, 9, 20, 0.2);
+}
+
 

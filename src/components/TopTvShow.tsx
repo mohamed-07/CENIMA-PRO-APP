@@ -21,14 +21,14 @@ export default function TopTvShow({ tvShow, nextPage, prevPage }: Props) {
                             className="w-full py-4">
                     <CarouselContent className="-ml-2 md:-ml-4">
                         {tvShow?.results.slice(5, 20).map((show) => (
-                            <CarouselItem onClick={() => console.log("Clicked on TV Show", show.id)}
+                            <CarouselItem onClick={() => console.log("Clicked on TV Show", show.id, show.name)}
                                         key={show.id} className=" pl-2 md:pl-4 basis-[75%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                                     <Link to={`/tv/${show.id}`} className=" h-full p-1">
-                                            <TvShowCard key={show.id} show={show} />
-                                        </Link>
-                                    </CarouselItem>
+                                        <TvShowCard key={show.id} show={show} />
+                                    </Link>
+                            </CarouselItem>
                                 ))}
-                            </CarouselContent>
+                    </CarouselContent>
                     <CarouselPrevious className="hidden md:flex absolute text-stone-300 left-4 top-1/2 -translate-y-1/2 z-10 bg-transparent hover:cursor-pointer " />
                     <CarouselNext className="hidden md:flex absolute text-stone-300 right-4 top-1/2 -translate-y-1/2 z-10 bg-transparent hover:cursor-pointer"  />
                 </Carousel>
